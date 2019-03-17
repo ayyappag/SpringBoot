@@ -7,3 +7,7 @@ Application using annotation based operations.
 # Postman
 Postman download is available in below link:
 https://www.getpostman.com/downloads/
+
+# Postman Collection
+Please find the attached postman collection
+
