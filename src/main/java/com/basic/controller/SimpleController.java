@@ -8,10 +8,13 @@ import org.json.JSONObject;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.basic.model.Customer;
 
 /**
  * @author Naidu
@@ -43,6 +46,15 @@ public class SimpleController {
 	public ResponseEntity<String> getCustomer() throws JSONException {
 		System.out.println("Retrieve Customer Details => " + obj.toString());
 		return new ResponseEntity<>(obj.toString(), HttpStatus.ACCEPTED);
+	}
+
+	@RequestMapping(value = "/bodycustomer", method = RequestMethod.POST, produces = "applicaiton/json")
+	public ResponseEntity<String> bodyCustomer(@RequestBody Customer customer) throws JSONException {
+		JSONObject custObject = new JSONObject();
+		custObject.put("name", customer.getName());
+		custObject.put("age", customer.getAge());
+		System.out.println("Customer Creation Using request body **");
+		return new ResponseEntity<>(custObject.toString(), HttpStatus.OK);
 	}
 
 }
