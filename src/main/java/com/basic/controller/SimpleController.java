@@ -5,7 +5,6 @@ package com.basic.controller;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.basic.model.Customer;
+import com.basic.model.UserProfile;
 
 /**
  * @author Naidu
@@ -54,6 +54,14 @@ public class SimpleController {
 		custObject.put("name", customer.getName());
 		custObject.put("age", customer.getAge());
 		System.out.println("Customer Creation Using request body **");
+		return new ResponseEntity<>(custObject.toString(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.POST, produces = "applicaiton/json")
+	public ResponseEntity<String> bodyCustomer(@RequestBody UserProfile profile) throws JSONException {
+		JSONObject custObject = new JSONObject();
+		custObject.put("profile", profile);
+		System.out.println("Customer Creation Using request body **" + profile);
 		return new ResponseEntity<>(custObject.toString(), HttpStatus.OK);
 	}
 
